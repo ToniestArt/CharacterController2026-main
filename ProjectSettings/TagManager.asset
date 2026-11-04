@@ -5,15 +5,16 @@ TagManager:
   serializedVersion: 3
   tags:
   - Empujable
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MiniMap
   - Water
   - UI
   - Ground
-  - 
+  - Box
   - 
   - 
   - 

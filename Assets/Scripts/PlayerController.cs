@@ -227,6 +227,35 @@ public class PlayerController : MonoBehaviour
             //_rbody.AddForce(pushDirection * _pushForce, ForceMode.Force);
             _rbody.linearVelocity = pushDirection * _pushForce / _rbody.mass;
         }
+
+        if(hit.gameObject.CompareTag("Enemy"))
+        {
+
+
+            Enemy enemyScript = hit.gameObject.GetComponent<Enemy>();
+            if (enemyScript != null)
+            {
+                enemyScript.TakeDamage();
+                return;
+            }
+
+        }
+
+        IDamageable damageable = hit.gameObject.GetComponent<IDamageable>();
+        if(damageable != null)
+        {
+            damageable.TakeDamage();
+        }
+
+      /*  Ejemplo antiguo:
+      
+      if (hit.gameObject.CompareTag("Caja"))
+        {
+            Caja cahaScript = hit.gameObject.GetComponent<Caja>();
+            cajaScript.TakeDama();
+        } 
+        
+        */
     }
 
     void OnDrawGizmos()

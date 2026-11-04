@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "CharacterController2026.slnx"
+    "dotnet.defaultSolution": "CharacterController2026-main.slnx"
 }
