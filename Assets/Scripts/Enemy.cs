@@ -4,8 +4,9 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     public float _maxHealth;
     public float _attackDamage;
+    [SerializeField] private PlayerController player;
 
-
+    private Animator _animator; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,5 +43,14 @@ public class Enemy : MonoBehaviour, IDamageable
         Debug.Log("Void TakeDamage Inicializada");
     }
 
+    public void KillZone ()
+    {
+        Debug.Log("Void KillZone Inicializada");
+        PlayerController player = FindAnyObjectByType<PlayerController>();
 
+        if (player != null)
+        {
+            player.IsDying();
+        }
+    }
 }

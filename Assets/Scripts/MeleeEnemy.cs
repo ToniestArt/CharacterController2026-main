@@ -17,7 +17,7 @@ public class MeleeEnemy : Enemy
 
         Patrol();
         FindPlayer();
-
+        KillZone();
         _maxHealth = 5;
     }
 

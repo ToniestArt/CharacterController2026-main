@@ -239,6 +239,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void IsDying()
+    {
+        if (_animator != null && !_animator.GetBool("IsDying"))
+        {
+            _animator.SetBool("IsDying", true);
+        }
+
+        Debug.Log("Void IsDying: Was executed this frame.");
+    }
+
+    public void ResetDyingState()
+    {
+        if (_animator != null)
+        {
+            _animator.SetBool("IsDying", false);
+        }
+    }
+
     bool IsGrounded()
     {
         return Physics.CheckSphere(_sensorTransform.position, _sensorRadius, _groundLayer);
