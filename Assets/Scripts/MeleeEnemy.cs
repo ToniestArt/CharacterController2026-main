@@ -14,11 +14,7 @@ public class MeleeEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-
-        Patrol();
-        FindPlayer();
-        KillZone();
-        _maxHealth = 5;
+      _maxHealth = 5;
     }
 
     void ChasePlayer()

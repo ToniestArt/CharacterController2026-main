@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private InputAction _aimAction;
     private InputAction _interactAction;
     private InputAction _attackAction;
+    private bool _isDying;
     
     [SerializeField] private float _movementSpeed = 10;
     [SerializeField] private float _jumpHeight = 2;
@@ -71,6 +72,26 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _moveInput = _moveAction.ReadValue<Vector2>();
+
+        if (_isDying)
+        {
+            _moveInput = Vector2.zero;
+
+            if (_animator != null)
+            {
+                _animator.SetBool("IsDying", true);
+                _animator.SetBool("IsRunning", false);
+                _animator.SetBool("IsWalking", false);
+                _animator.SetBool("IsWalkingBackwards", false);
+                _animator.SetBool("IsRunningLeft", false);
+                _animator.SetBool("IsRunningRight", false);
+                _animator.SetBool("IsWalkingLeft", false);
+                _animator.SetBool("IsWalkingRight", false);
+                _animator.SetBool("IsJumping", false);
+            }
+
+            return;
+        }
 
         Gravity();
 
@@ -241,19 +262,42 @@ public class PlayerController : MonoBehaviour
 
     public void IsDying()
     {
-        if (_animator != null && !_animator.GetBool("IsDying"))
+        if (_isDying)
         {
-            _animator.SetBool("IsDying", true);
+            return;
         }
 
-        Debug.Log("Void IsDying: Was executed this frame.");
+        _isDying = true;
+
+        if (_animator != null)
+        {
+            _animator.SetBool("IsDying", true);
+            _animator.SetBool("IsRunning", false);
+            _animator.SetBool("IsWalking", false);
+            _animator.SetBool("IsWalkingBackwards", false);
+            _animator.SetBool("IsRunningLeft", false);
+            _animator.SetBool("IsRunningRight", false);
+            _animator.SetBool("IsWalkingLeft", false);
+            _animator.SetBool("IsWalkingRight", false);
+            _animator.SetBool("IsJumping", false);
+        }
     }
 
     public void ResetDyingState()
     {
+        _isDying = false;
+
         if (_animator != null)
         {
             _animator.SetBool("IsDying", false);
+            _animator.SetBool("IsRunning", false);
+            _animator.SetBool("IsWalking", false);
+            _animator.SetBool("IsWalkingBackwards", false);
+            _animator.SetBool("IsRunningLeft", false);
+            _animator.SetBool("IsRunningRight", false);
+            _animator.SetBool("IsWalkingLeft", false);
+            _animator.SetBool("IsWalkingRight", false);
+            _animator.SetBool("IsJumping", false);
         }
     }
 
@@ -362,6 +406,21 @@ public class PlayerController : MonoBehaviour
         */
         Debug.Log("Void OnControllerColliderHit: Was executed this frame.");
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other == null)
+        {
+            return;
+        }
+
+        bool isKillZone = other.CompareTag("KillZone") || other.CompareTag("Enemy") || other.CompareTag("MeleeEnemy");
+
+        if (isKillZone || other.GetComponent<Enemy>() != null)
+        {
+            IsDying();
+        }
     }
 
     void OnDrawGizmos()

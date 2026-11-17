@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Empujable
   - Enemy
+  - KillZone
   layers:
   - Default
   - TransparentFX

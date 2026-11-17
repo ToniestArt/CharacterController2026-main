@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Debug.Log("Void TakeDamage Inicializada");
     }
-
+/*
     public void KillZone ()
     {
         Debug.Log("Void KillZone Inicializada");
@@ -53,4 +53,5 @@ public class Enemy : MonoBehaviour, IDamageable
             player.IsDying();
         }
     }
+    */
 }
